@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<Words xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Cars>
+    <string>DACIA LOGAN</string>
+    <string>BMW</string>
+    <string>MERCEDES</string>
+    <string>TOYOTA</string>
+    <string>HYUNDAI</string>
+    <string>RENAULT</string>
+    <string>FORD</string>
+    <string>VOLKSVAGEN</string>
+    <string>HONDA</string>
+    <string>SUBARU</string>
+    <string>FERRARI</string>
+    <string>ASTON MARTIN</string>
+    <string>CITROEN</string>
+    <string>RANGE ROVER</string>
+    <string>LAND ROVER</string>
+    <string>OPEL</string>
+    <string>AUDI</string>
+    <string>PORCHE</string>
+  </Cars>
+  <Movies>
+    <string>TITANIC</string>
+    <string>TRES METROS SOBRE EL CIELO</string>
+    <string>HACHIKO</string>
+    <string>JOKER</string>
+    <string>SUPERMAN</string>
+    <string>LA CASA DE PAPEL</string>
+    <string>CERNOBIL</string>
+    <string>AVENGERS</string>
+    <string>FROZEN</string>
+    <string>JUMANJI</string>
+    <string>RAZBOIUL STELELOR</string>
+    <string>PE ARIPILE VANTULUI</string>
+    <string>THE LION KING</string>
+    <string>LUCIFER</string>
+    <string>BATMAN</string>
+    <string>SPIDERMAN</string>
+    <string>MIRAGE</string>
+  </Movies>
+  <Flowers>
+    <string>LALEA</string>
+    <string>CRIN</string>
+    <string>TRANDAFIR</string>
+    <string>LACRAMIOARA</string>
+    <string>FLOAREA SOARELUI</string>
+    <string>GERBERA</string>
+    <string>GAROAFA</string>
+    <string>CRIZANTEMA</string>
+    <string>BUJOR</string>
+    <string>FREZIE</string>
+    <string>ZAMBILA</string>
+    <string>NARCISA</string>
+    <string>STANJENEL</string>
+    <string>TOPORAS</string>
+    <string>FLOARE DE COLT</string>
+  </Flowers>
+  <Rivers>
+    <string>DUNARE</string>
+    <string>VOLGA</string>
+    <string>PRUT</string>
+    <string>NIL</string>
+    <string>OLT</string>
+    <string>TIMIS</string>
+    <string>SENA</string>
+    <string>CRISUL ALB</string>
+    <string>CRISUL NEGRU</string>
+    <string>CRISUL REPEDE</string>
+    <string>TAMISA</string>
+    <string>MURES</string>
+    <string>BISTRITA</string>
+    <string>SIRET</string>
+    <string>MISSISSIPPI</string>
+    <string>AMAZON</string>
+    <string>RIN</string>
+    <string>NIAGARA</string>
+  </Rivers>
+</Words>

@@ -1,0 +1,145 @@
+﻿<Window x:Class="HangMan.Views.GameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HangMan.Views"
+        xmlns:ctx="clr-namespace:HangMan.ViewModels"
+        mc:Ignorable="d"
+        Title="HangMan" Height="550" Width="710" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="RoundedBorder" TargetType="Border">
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+        <Style x:Key="RoundedButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="7,7,7,7" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding  Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding  VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DeepSkyBlue"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22*"/>
+            <RowDefinition Height="118*"/>
+            <RowDefinition Height="323*"/>
+            <RowDefinition Height="58*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="151*"/>
+            <ColumnDefinition Width="195*"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="694">
+            <MenuItem x:Name="FileMenu" FontFamily ="Comic Sans MS" Header="File">
+                <MenuItem x:Name="SaveGameMenu" Header="Save Game" FontFamily="Comic Sans MS" Command="{Binding SaveCommand}"/>
+                <MenuItem x:Name="StatisticsMenu" Header="Statistics" FontFamily="Comic Sans MS" Command="{Binding StatsCommand}"/>
+                <MenuItem x:Name="ExitMenu" Header="Exit" FontFamily="Comic Sans MS" Command="{Binding BackCommand}"/>
+            </MenuItem>
+            <MenuItem x:Name="CategoriesMenu" FontFamily="Comic Sans MS" Header="Categories">
+                <RadioButton x:Name="AllCategoriesMenu" FontFamily="Comic Sans MS" Content="All Categories" IsChecked="{Binding AllCategoryChecked}" Command="{Binding ChangeCategoryCommand}" CommandParameter="{Binding ElementName=AllCategoriesMenu, Path=Content}"/>
+                <RadioButton x:Name="RiversMenu" FontFamily="Comic Sans MS" Content="Rivers" IsChecked="{Binding RiversCategoryChecked}" Command="{Binding ChangeCategoryCommand}" CommandParameter="{Binding ElementName=RiversMenu, Path=Content}"/>
+                <RadioButton x:Name="CarsMenu" FontFamily="Comic Sans MS" Content="Cars" IsChecked="{Binding CarsCategoryChecked}" Command="{Binding ChangeCategoryCommand}" CommandParameter="{Binding ElementName=CarsMenu, Path=Content}"/>
+                <RadioButton x:Name="MoviesMenu" FontFamily="Comic Sans MS" Content="Movies" IsChecked="{Binding MoviesCategoryChecked}" Command="{Binding ChangeCategoryCommand}" CommandParameter="{Binding ElementName=MoviesMenu, Path=Content}"/>
+                <RadioButton x:Name="FlowersMenu" FontFamily="Comic Sans MS" Content="Flowers" IsChecked="{Binding FlowersCategoryChecked}" Command="{Binding ChangeCategoryCommand}" CommandParameter="{Binding ElementName=FlowersMenu, Path=Content}"/>
+            </MenuItem>
+            <MenuItem x:Name="HelpMenu" FontFamily="Comic Sans MS" Header="Help">
+                <MenuItem x:Name="About" FontFamily="Comic Sans MS" Header="About" Command="{Binding AboutCommand}"/>
+            </MenuItem>
+        </Menu>
+        <Image Grid.Column="0" Grid.Row="1" Source="{Binding UserImagePath}" Margin="10,2,0,1" HorizontalAlignment="Left" Width="150"/>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,10" Width="182" Height="98">
+            <WrapPanel>
+                <Label x:Name="NameLbl" Width="55" Content="Name: " FontFamily="Comic Sans MS" HorizontalAlignment="Left" FontSize="15"></Label>
+                <Label x:Name="UserName" Width="127" Content="{Binding UserName}" FontFamily="Comic Sans MS" HorizontalAlignment="Left" FontSize="15"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="52" Content="Level: " FontFamily="Comic Sans MS" HorizontalAlignment="Left" FontSize="15"></Label>
+                <Label x:Name="LvlLbl" Width="129" FontFamily="Comic Sans MS" HorizontalAlignment="Left" FontSize="15" Content="{Binding Level}"/>
+            </WrapPanel>
+            <WrapPanel Height="35">
+                <Label Width="80" Content="Category: " FontFamily="Comic Sans MS" HorizontalAlignment="Left" FontSize="15"/>
+                <Label x:Name="CategoryLbl" Width="102" FontFamily="Comic Sans MS" HorizontalAlignment="Left" FontSize="14" Content="{Binding CategoryProperty}"/>
+            </WrapPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+            <WrapPanel HorizontalAlignment="Right" Margin="0,0,20,0">
+                <Label Content="Mistakes: " FontFamily="Comic Sans MS" HorizontalAlignment="Right" FontSize="15" Width="80"></Label>
+                <Label Name="ChancesLbl" FontFamily="Comic Sans MS" Width="30" HorizontalContentAlignment="Right" 
+                       VerticalContentAlignment="Center" FontSize="15" FontWeight="Black" Foreground="Red" Content="{Binding Mistakes}"/>
+                <Label FontFamily="Comic Sans MS" Width="40" HorizontalContentAlignment="Left" 
+                       VerticalContentAlignment="Center" FontSize="15" FontWeight="Black" Foreground="Red" Content="/ 6"/>
+            </WrapPanel>
+            <Label Name="GuessLbl" Content="Guess the word!" FontFamily="Comic Sans MS" FontSize="30" HorizontalAlignment="Center" Height="49" Margin="0,30"></Label>
+        </StackPanel>
+        <Image Grid.Row ="2" Grid.Column="0" Source="{Binding ImagePath}" Margin="10,0,0,0"/>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="81*"/>
+                <RowDefinition Height="242*"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="WordPanel" Grid.Row="0" Margin="0,10,0,0">
+                <Label Height="72" x:Name="wordLabel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        FontSize="25" FontFamily="Comic Sans MS" Content="{Binding Word}"></Label>
+            </StackPanel>
+            <Grid Grid.Row="1" Margin="0,23,0,73">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" HorizontalAlignment="Center">
+                    <Button x:Name="ABtn" Content="A" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=ABtn}"/>
+                    <Button x:Name="BBtn" Content="B" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=BBtn}"/>
+                    <Button x:Name="CBtn" Content="C" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=CBtn}"/>
+                    <Button x:Name="DBtn" Content="D" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=DBtn}"/>
+                    <Button x:Name="EBtn" Content="E" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=EBtn}"/>
+                    <Button x:Name="FBtn" Content="F" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=FBtn}"/>
+                    <Button x:Name="GBtn" Content="G" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=GBtn}"/>
+                    <Button x:Name="HBtn" Content="H" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=HBtn}"/>
+                    <Button x:Name="IBtn" Content="I" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=IBtn}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+                    <Button x:Name="JBtn" Content="J" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=JBtn}"/>
+                    <Button x:Name="KBtn" Content="K" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=KBtn}"/>
+                    <Button x:Name="LBtn" Content="L" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=LBtn}"/>
+                    <Button x:Name="MBtn" Content="M" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=MBtn}"/>
+                    <Button x:Name="NBtn" Content="N" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=NBtn}"/>
+                    <Button x:Name="OBtn" Content="O" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=OBtn}"/>
+                    <Button x:Name="PBtn" Content="P" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=PBtn}"/>
+                    <Button x:Name="QBtn" Content="Q" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=QBtn}"/>
+                    <Button x:Name="RBtn" Content="R" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=RBtn}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+                    <Button x:Name="SBtn" Content="S" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=SBtn}"/>
+                    <Button x:Name="TBtn" Content="T" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=TBtn}"/>
+                    <Button x:Name="UBtn" Content="U" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=UBtn}"/>
+                    <Button x:Name="VBtn" Content="V" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=VBtn}"/>
+                    <Button x:Name="WBtn" Content="W" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=WBtn}"/>
+                    <Button x:Name="XBtn" Content="X" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=XBtn}"/>
+                    <Button x:Name="YBtn" Content="Y" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=YBtn}"/>
+                    <Button x:Name="ZBtn" Content="Z" FontFamily="Comic Sans MS" Width="30" Height="30" Margin="5,0" Style="{StaticResource RoundedButtonStyle}" Command="{Binding LetterCommand}" CommandParameter="{Binding ElementName=ZBtn}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Button x:Name="BackBtn" Grid.Row="3" Grid.Column="1" Content="Exit" FontFamily="Comic Sans MS" FontSize="25" Width="100" Height="35" Style="{StaticResource RoundedButtonStyle}" Margin="250,0,0,0"
+                Command="{Binding BackCommand}"/>
+        <WrapPanel Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10,314,0,-9" Grid.RowSpan="2" Width="293">
+            <Label x:Name="timeLabel" Width="60" Content="TIME:" FontSize="16" FontFamily="Comic Sans MS" FontWeight="Black"></Label>
+            <Label x:Name="secondsLabel" FontSize="17" FontFamily="Comic Sans MS" FontWeight="Black" Width="60" HorizontalContentAlignment="Center" Content="{Binding DispatcherTimer}"/>
+            <Label Content="seconds remaining" Width="165" FontSize="17" FontFamily="Comic Sans MS" FontWeight="Black"/>
+        </WrapPanel>
+    </Grid>
+</Window>

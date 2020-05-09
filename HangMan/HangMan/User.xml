@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<SignInViewModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UsersList>
+    <User>
+      <Name>Alex</Name>
+      <ImagePath>/Images/Avatars/avatar6.png</ImagePath>
+      <WonGame>0</WonGame>
+      <LostGame>0</LostGame>
+    </User>
+    <User>
+      <Name>Teo</Name>
+      <ImagePath>/Images/Avatars/avatar10.png</ImagePath>
+      <WonGame>0</WonGame>
+      <LostGame>0</LostGame>
+    </User>
+    <User>
+      <Name>Robert</Name>
+      <ImagePath>/Images/Avatars/avatar1.png</ImagePath>
+      <WonGame>0</WonGame>
+      <LostGame>0</LostGame>
+    </User>
+    <User>
+      <Name>Daniela</Name>
+      <ImagePath>/Images/Avatars/avatar7.png</ImagePath>
+      <WonGame>0</WonGame>
+      <LostGame>0</LostGame>
+    </User>
+    <User>
+      <Name>Gabriela</Name>
+      <ImagePath>/Images/Avatars/avatar8.png</ImagePath>
+      <WonGame>0</WonGame>
+      <LostGame>0</LostGame>
+    </User>
+  </UsersList>
+</SignInViewModel>
